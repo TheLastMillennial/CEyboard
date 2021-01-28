@@ -4,11 +4,13 @@ SendInput,Mode Input  ; Recommended for new scripts due to its superior speed an
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ;Keybindings by TheLastMillennial
-;https://www.cemetech.net/forum/viewtopic.php?t=17392
+;Cemetech: https://www.cemetech.net/forum/viewtopic.php?t=17392
+;Github: https://github.com/TheLastMillennial/ti84plusce-autohotkey
 
-;If you encounter an issue where Office opens when you press a key, you can apply a registry tweak using command prompt with admin privliges.
-;REG ADD HKLM\Software\Classes\ms-officeapp\Shell\Open\Command /t REG_SZ /d rundll32
-;I ran this myself and it has no negative effects. I found this tweak here: https://www.tenforums.com/microsoft-office-365/154729-disable-shift-ctrl-windows-alt-opening-login-office.html
+;keyStatus 0 is number input; keyStatus 1 is alpha input; keystatus 2 is emulator input
+keyStatus := 0
+
+TrayTip, TI-84 Plus CE Hotkey, Press ctrl+win+alt+space to swap modes, 2
 
 ;y= to graph
 <^<#F1::
@@ -67,7 +69,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 	SendInput, {>!} ;SendInput,s right alt
 	Return
 <^<#<!F6::
-	SendInput, {NumLock}
+	SetNumLockState % !GetKeyState("NumLock", "T")
 	Return
 <^<#<!<+F4::
 	SendInput, {Delete}
@@ -87,7 +89,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 	SendInput, {>^} ; SendInput,s right ctrl
 	Return
 <^<#<!F7::
-	SendInput, {<^>!} ; SendInput,s altgr
+	SetCapsLockState % !GetKeyState("CapsLock", "T") ; Toggles capslock
 	Return
 <^<#<!<+F5::
 	SendInput, {F7}
@@ -114,9 +116,8 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 	Return
 	
 ;x^-1 to ^
-xInverse = (x^-1)
 <^<#F9::
-	SendInput, %xInverse%
+	Send, x{^}-1
 	Return
 <^<#<!F9::
 	SendInput, sin(
@@ -128,13 +129,12 @@ xInverse = (x^-1)
 	SendInput, tan(
 	Return
 <^<#<+F11::
-	SendInput, ^
+	Send, {^}
 	Return
 
 ;x^2 to /
-xSquared = (x^2)
 <^<#<!F1::
-	SendInput, %xSquared%
+	Send, x{^}2
 	Return
 <^<#<!F10::
 	SendInput, ,
@@ -204,6 +204,20 @@ xSquared = (x^2)
 <^<#<!F5::
 	SendInput, {Pause}
 	Return
+
+;handles swapping modes
+<^<#<!Space::
+	keyStatus:=keyStatus+1
+	if(keyStatus = 3)
+		keyStatus:=0
+	if(keyStatus=0)
+		TrayTip, TI-84 Plus CE Hotkey, Mode 0: Numeric input (default), 2, 16
+	if(keyStatus=1)
+		TrayTip, TI-84 Plus CE Hotkey, Mode 1: Alpha input, 2, 16
+	if(keyStatus=2)
+		TrayTip, TI-84 Plus CE Hotkey, Mode 2: Emulator input, 2, 16
+	Return
+	
 <^<#<!<+F3::
 	SendInput, {Numpad0}
 	Return
