@@ -11,6 +11,17 @@ By TheLastMillennial
  - SmartPad (Included, if you lost the file you can find it from either link below) 
    - Texas Instrument's website: https://education.ti.com/en/software/details/en/B346FFA763C147F5BCE56880CECC28E6/smartpad-ce
    - TI-Planet: https://tiplanet.org/forum/archives_voir.php?id=1138279
+ - TI-Connect CE
+   - https://education.ti.com/en/products/computer-software/ti-connect-ce-sw
+   
+## Instructions:
+1. Install TI-Connect CE
+2. Connect your calculator to your computer
+3. Send SmartPad to your calculator
+4. Press [apps] on the calculator and run SmartPad (make sure to press any key when it asks for it)
+5. Install AutoHotKey
+6. Run the TI-84 Plus CE.ahk file
+7. You should be set! Open a text editor and press a few calculator keys to verify things are working.
 
 ## Troubleshooting:
 If you encounter an issue where Office opens when you press a key, you can apply a registry tweak using command prompt with admin privliges.
