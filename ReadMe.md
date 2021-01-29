@@ -23,7 +23,11 @@ By TheLastMillennial
 7. You should be set! Open a text editor and press a few calculator keys to verify things are working.
 
 ## Instructions:
-Whenever you want to run the hotkey file, just run TI-84 Plus CE.ahk
+Whenever you want to run the hotkey file:
+1. Run TI-84 Plus CE.ahk
+2. Connect your calculator to your computer
+3. Run the SmartPad app 
+
 To use the modifier keys, press the modifier key then press the key you want to modify within the 750ms window.
  - i.e. to display the imaginary i, press [2nd] then quickly press [.] 
 ### Modes:
