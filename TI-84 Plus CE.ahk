@@ -12,11 +12,8 @@ keyStatus := 0
 
 TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 
-
-
-
-;y= to graph the 2nd and alpha add F6 to F15 capabilities
-<^<#F1::
+;y= to graph. The 2nd and alpha add F6 to F15 capabilities
+<^<#F1:: ;y=
 	if (keyStatus != 2)
 	if ((A_PriorHotKey = "<^<#F7" or A_PriorHotKey = "<^<#F6") and A_TimeSincePriorHotkey < 750)
 	{
@@ -28,7 +25,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 	else 									; no modifier
 		SendInput, {F1}
 	Return
-<^<#F2::
+<^<#F2:: ;window
 	if (keyStatus != 2)
 	if ((A_PriorHotKey = "<^<#F7" or A_PriorHotKey = "<^<#F6") and A_TimeSincePriorHotkey < 750)
 	{
@@ -40,7 +37,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 	else 									; no modifier
 		SendInput, {F3}
 	Return
-<^<#F3::
+<^<#F3:: ;zoom
 	if (keyStatus != 2)
 	if ((A_PriorHotKey = "<^<#F7" or A_PriorHotKey = "<^<#F6") and A_TimeSincePriorHotkey < 750)
 	{
@@ -52,7 +49,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 	else 									; no modifier
 		SendInput, {F3}
 	Return
-<^<#T::
+<^<#T:: ;trace
 	if (keyStatus != 2)
 	if ((A_PriorHotKey = "<^<#F7" or A_PriorHotKey = "<^<#F6") and A_TimeSincePriorHotkey < 750)
 	{
@@ -64,7 +61,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 	else 									; no modifier
 		SendInput, {F4}
 	Return
-<^<#F5::
+<^<#F5:: ;graph
 	if (keyStatus != 2)
 	if ((A_PriorHotKey = "<^<#F7" or A_PriorHotKey = "<^<#F6") and A_TimeSincePriorHotkey < 750)
 	{
@@ -97,11 +94,18 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 			if(keyStatus=2)
 				TrayTip, TI-84 Plus CE Hotkey, Mode 2: Emulator input, 2, 16
 		}
-		else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+		else if (A_PriorHotKey = "<^<#F6")   ; 2nd
 			SendInput, {Escape}
+		else if (A_PriorHotKey = "<^<#<!F5") ; On
+			SendInput, {Sleep}
 	}
 	else 									; no modifier
-		SetNumLockState % !GetKeyState("NumLock", "T")
+		if (keyStatus !=2)
+		{
+			SetNumLockState % !GetKeyState("NumLock", "T")
+			NumLState := GetKeyState("NumLock", "T")
+			TrayTip, TI-84 Plus CE Hotkey, NumLock set to %NumLState%, 1, 16 ;delete this line if you don't want a notification whenever numlock changes
+		}
 	Return
 	
 
@@ -164,7 +168,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 	if ((A_PriorHotKey = "<^<#F7" or A_PriorHotKey = "<^<#F6") and A_TimeSincePriorHotkey < 750)
 	{
 		if (A_PriorHotKey = "<^<#F7") 		; Alpha
-			SendInput, [NumpadDiv}
+			SendInput, {NumpadDiv}
 		else if (A_PriorHotKey = "<^<#F6")  ; 2nd
 			SendInput, {Media_Play_Pause}
 	}
@@ -325,7 +329,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 	
 	Return
 <^<#<!F9:: ;sin
-		if (keyStatus = 0)							;[Numeric Input]
+		if (keyStatus = 0)						;[Numeric Input]
 	{
 		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
 		{
@@ -372,56 +376,371 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 	}
 	
 	Return
-<^<#<+F3::
-	SendInput, tan(
+<^<#<+F3:: ;tan
+	if (keyStatus = 0)							;[Numeric Input]
+	{
+		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
+		{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, G
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, tan{^}-1(){Left}
+		}										; no modifier
+		else
+			SendInput, tan(){Left}
+	}
+	else if (keyStatus = 1)						;[Alpha Input]
+	{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, G
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, ^g
+			else								; no modifier
+				SendInput, g
+	}
+	
 	Return
-<^<#<+F11::
-	Send, {^}
+<^<#<+F11:: ;^
+	if (keyStatus = 0)							;[Numeric Input]
+	{
+		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
+		{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, H
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, π
+		}										; no modifier
+		else
+			Send, {^}
+	}
+	else if (keyStatus = 1)						;[Alpha Input]
+	{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, H
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, ^h
+			else								; no modifier
+				SendInput, h
+	}
+	
 	Return
 
 ;x^2 to /
-<^<#<!F1::
-	Send, x{^}2
+<^<#<!F1:: ;x^2
+	if (keyStatus = 0)							;[Numeric Input]
+	{
+		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
+		{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, I
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, √(){Left}
+		}										; no modifier
+		else
+			Send, x{^}2
+	}
+	else if (keyStatus = 1)						;[Alpha Input]
+	{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, I
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, ^i
+			else								; no modifier
+				SendInput, i
+	}
+	
 	Return
-<^<#<!F10::
-	SendInput, ,
+<^<#<!F10:: ;,
+	if (keyStatus = 0)							;[Numeric Input]
+	{
+		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
+		{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, J
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, E
+		}										; no modifier
+		else
+			SendInput, ,
+	}
+	else if (keyStatus = 1)						;[Alpha Input]
+	{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, J
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, ^j
+			else								; no modifier
+				SendInput, j
+	}
+	
 	Return
-<^<#<!<+F8::
-	SendInput, (
+<^<#<!<+F8:: ;(
+	if (keyStatus = 0)							;[Numeric Input]
+	{
+		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
+		{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, K
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, {{}
+		}										; no modifier
+		else
+			SendInput, (
+	}
+	else if (keyStatus = 1)						;[Alpha Input]
+	{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, K
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, ^k
+			else								; no modifier
+				SendInput, k
+	}
+	
 	Return
-<^<#<+F4::
-	SendInput, )
+<^<#<+F4:: ;)
+	if (keyStatus = 0)							;[Numeric Input]
+	{
+		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
+		{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, L
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, {}}
+		}										; no modifier
+		else
+			SendInput, )
+	}
+	else if (keyStatus = 1)						;[Alpha Input]
+	{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, L
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, ^l
+			else								; no modifier
+				SendInput, l
+	}
+	
 	Return
 <^<#NumpadDiv::
-	SendInput, {NumpadDiv}
+	if (keyStatus = 0)							;[Numeric Input]
+	{
+		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
+		{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, M
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, e
+		}										; no modifier
+		else
+			SendInput, {NumpadDiv}
+	}
+	else if (keyStatus = 1)						;[Alpha Input]
+	{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, M
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, ^m
+			else								; no modifier
+				SendInput, m
+	}
+	
 	Return
 	
 ; log to *
-<^<#<!F2::
-	SendInput, log(
+<^<#<!F2:: ;log
+	if (keyStatus = 0)							;[Numeric Input]
+	{
+		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
+		{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, N
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, 10{^}(){Left}
+		}										; no modifier
+		else
+			SendInput, log(){Left}
+	}
+	else if (keyStatus = 1)						;[Alpha Input]
+	{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, N
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, ^n
+			else								; no modifier
+				SendInput, n
+	}
+	
 	Return
-<^<#<!F11::
-	SendInput, {Numpad7}
+<^<#<!F11:: ;7
+	if (keyStatus = 0)							;[Numeric Input]
+	{
+		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
+		{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, O
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, u
+		}										; no modifier
+		else
+			SendInput, {Numpad7}
+	}
+	else if (keyStatus = 1)						;[Alpha Input]
+	{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, O
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, ^o
+			else								; no modifier
+				SendInput, o
+	}
+	
 	Return
-<^<#<!<+F9::
-	SendInput, {Numpad8}
+<^<#<!<+F9:: ;8
+	if (keyStatus = 0)							;[Numeric Input]
+	{
+		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
+		{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, P
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, v
+		}										; no modifier
+		else
+			SendInput, {Numpad8}
+	}
+	else if (keyStatus = 1)						;[Alpha Input]
+	{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, P
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, ^p
+			else								; no modifier
+				SendInput, p
+	}
+	
 	Return
-<^<#<+F5::
-	SendInput, {Numpad9}
+<^<#<+F5:: ;9
+	if (keyStatus = 0)							;[Numeric Input]
+	{
+		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
+		{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, Q
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, w
+		}										; no modifier
+		else
+			SendInput, {Numpad9}
+	}
+	else if (keyStatus = 1)						;[Alpha Input]
+	{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, Q
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, ^q
+			else								; no modifier
+				SendInput, q
+	}
+	
 	Return
 <^<#NumpadMult::
-	SendInput, {NumpadMult}
+	if (keyStatus = 0)							;[Numeric Input]
+	{
+		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
+		{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, R
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, [
+		}										; no modifier
+		else
+			SendInput, {NumpadMult}
+	}
+	else if (keyStatus = 1)						;[Alpha Input]
+	{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, R
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, ^r
+			else								; no modifier
+				SendInput, r
+	}
+	
 	Return
 	
 ;ln to -
 <^<#<!F3::
-	SendInput, ln(
+	if (keyStatus = 0)							;[Numeric Input]
+	{
+		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
+		{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, S
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, e{^}(){Left}
+		}										; no modifier
+		else
+			SendInput, ln(){Left}
+	}
+	else if (keyStatus = 1)						;[Alpha Input]
+	{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, S
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, ^s
+			else								; no modifier
+				SendInput, s
+	}
+	
 	Return
-<^<#<!<+F1::
-	SendInput, {Numpad4}
+<^<#<!<+F1:: ;4
+	if (keyStatus = 0)							;[Numeric Input]
+	{
+		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
+		{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, T
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, ^t
+		}										; no modifier
+		else
+			SendInput, {Numpad4}
+	}
+	else if (keyStatus = 1)						;[Alpha Input]
+	{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, T
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, ^t
+			else								; no modifier
+				SendInput, t
+	}
+	
 	Return
-<^<#<!<+F10::
-	SendInput, {Numpad5}
+<^<#<!<+F10:: ;5
+	if (keyStatus = 0)							;[Numeric Input]
+	{
+		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
+		{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, U
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, ^u
+		}										; no modifier
+		else
+			SendInput, {Numpad5}
+	}
+	else if (keyStatus = 1)						;[Alpha Input]
+	{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, U
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, ^u
+			else								; no modifier
+				SendInput, u
+	}
+	
 	Return
 <^<#<+F6:: ;6
 	if (keyStatus = 0)							;[Numeric Input]
@@ -455,7 +774,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 				if (A_PriorHotKey = "<^<#F7") 		; Alpha
 					SendInput, W
 				else if (A_PriorHotKey = "<^<#F6")  ; 2nd
-					SendInput, ^w
+					SendInput, ]
 			}
 			else 								; no modifier
 				SendInput, {NumpadSub}
@@ -569,25 +888,141 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 	}
 	
 	Return
-<^<#NumpadAdd::
-	SendInput, {NumpadAdd}
+<^<#NumpadAdd:: ;+
+	if (keyStatus = 0)							;[Numeric Input]
+	{
+		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
+		{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, {"}
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, ^{Tab}
+		}										; no modifier
+		else
+			SendInput, {NumpadAdd}
+	}
+	else if (keyStatus = 1)						;[Alpha Input]
+	{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, {'}
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, ``
+			else								; no modifier
+				SendInput, {"}
+	}
+	
 	Return
 	
 ;on to enter
-<^<#<!F5::
-	SendInput, {Pause}
+<^<#<!F5:: ;on
+	if (keyStatus != 2)							;[Numeric and AlphaInput]
+	{
+		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
+		{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, {CtrlBreak}
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				TrayTip, TI-84 Plus CE Hotkey, Press [mode] to put computer to sleep. Wait 1 second to cancel., 2
+		}										; no modifier
+		else
+			SendInput, {Pause}
+	}
+	
 	Return	
-<^<#<!<+F3::
-	SendInput, {Numpad0}
+<^<#<!<+F3:: ;0
+	if (keyStatus = 0)							;[Numeric Input]
+	{
+		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
+		{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, {Space}
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, {Help}
+		}										; no modifier
+		else
+			SendInput, {Numpad0}
+	}
+	else if (keyStatus = 1)						;[Alpha Input]
+	{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, {Space}
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, ^{Space}
+			else								; no modifier
+				SendInput, {Space}
+	}
+	
 	Return
-<^<#<+F1::
-	SendInput, {NumpadDot}
+<^<#<+F1:: ;.
+	if (keyStatus = 0)							;[Numeric Input]
+	{
+		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
+		{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, :
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, 𝑖
+		}										; no modifier
+		else
+			SendInput, {NumpadDot}
+	}
+	else if (keyStatus = 1)						;[Alpha Input]
+	{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, {;}
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, {NumpadDot}
+			else								; no modifier
+				SendInput, {:}
+	}
+	
 	Return
-<^<#<+F8::
-	SendInput, {NumpadSub}
+<^<#<+F8:: ;(-)
+	if (keyStatus = 0)							;[Numeric Input]
+	{
+		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
+		{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, ?
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, ^+z
+		}										; no modifier
+		else
+			SendInput, {NumpadSub}
+	}
+	else if (keyStatus = 1)						;[Alpha Input]
+	{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, {!}
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, _
+			else								; no modifier
+				SendInput, ?
+	}
+	
 	Return
 ;No need to edit Enter, it already works as the enter key
-;Enter::
-;	SendInput, {
-;	Return
+Enter::
+	if (keyStatus = 0)							;[Numeric Input]
+	{
+		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
+		{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, {Enter}
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, ^{Enter}
+		}										; no modifier
+		else
+			SendInput, {Enter}
+	}
+	else if (keyStatus = 1)						;[Alpha Input]
+	{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, +{Enter}
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, ^+z
+			else								; no modifier
+				SendInput, {Enter}
+	}
+	Return
 	
