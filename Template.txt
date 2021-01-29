@@ -1,0 +1,23 @@
+Template:
+	if (keyStatus = 0)							;[Numeric Input]
+	{
+		if ((A_PriorHotKey != <^<#F7) and (A_PriorHotKey != <^<#F6)) and (A_TimeSincePriorHotkey < 750)
+			{
+				if A_PriorHotKey = <^<#F7 		; Alpha
+					SendInput, 
+				else if A_PriorHotKey = <^<#F6  ; 2nd
+					SendInput, ^
+				else
+					
+			}							; no modifier
+				
+	}
+	else if (keyStatus = 1)					;[Alpha Input]
+	{
+			if A_PriorHotKey = <^<#F7 		; Alpha
+				SendInput, 
+			else if A_PriorHotKey = <^<#F6  ; 2nd
+				SendInput, ^
+			else							; no modifier
+				SendInput, 
+	}
