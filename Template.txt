@@ -7,21 +7,20 @@ Template:
 				SendInput, 
 			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
 				SendInput, ^
-		}							; no modifier
+		}										; no modifier
 		else
 			
 	}
-	else if (keyStatus = 1)					;[Alpha Input]
+	else if (keyStatus = 1)						;[Alpha Input]
 	{
 			if (A_PriorHotKey = "<^<#F7") 		; Alpha
 				SendInput, 
 			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
 				SendInput, ^
-			else							; no modifier
+			else								; no modifier
 				SendInput, 
 	}
 	
-	secondKey:=<^<#F6
-alphaKey:=<^<#F7
-
-451231231456789
+	secondKey:=<^<#F6{{{
+alphaKey:=<^<#F7{
+{

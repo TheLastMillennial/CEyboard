@@ -25,7 +25,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 		else if (A_PriorHotKey = "<^<#F6")  ; 2nd
 			SendInput, {F6}
 	}
-	else 								; no modifier
+	else 									; no modifier
 		SendInput, {F1}
 	Return
 <^<#F2::
@@ -37,7 +37,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 		else if (A_PriorHotKey = "<^<#F6")  ; 2nd
 			SendInput, {F8}
 	}
-	else 								; no modifier
+	else 									; no modifier
 		SendInput, {F3}
 	Return
 <^<#F3::
@@ -49,7 +49,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 		else if (A_PriorHotKey = "<^<#F6")  ; 2nd
 			SendInput, {F8}
 	}
-	else 								; no modifier
+	else 									; no modifier
 		SendInput, {F3}
 	Return
 <^<#T::
@@ -61,7 +61,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 		else if (A_PriorHotKey = "<^<#F6")  ; 2nd
 			SendInput, {F9}
 	}
-	else 								; no modifier
+	else 									; no modifier
 		SendInput, {F4}
 	Return
 <^<#F5::
@@ -73,7 +73,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 		else if (A_PriorHotKey = "<^<#F6")  ; 2nd
 			SendInput, {F10}
 	}
-	else 								; no modifier
+	else 									; no modifier
 		SendInput, {F5}
 	Return
 
@@ -100,7 +100,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 		else if (A_PriorHotKey = "<^<#F6")  ; 2nd
 			SendInput, {Escape}
 	}
-	else 								; no modifier
+	else 									; no modifier
 		SetNumLockState % !GetKeyState("NumLock", "T")
 	Return
 	
@@ -110,7 +110,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 	if ((A_PriorHotKey = "<^<#F7" or A_PriorHotKey = "<^<#F6") and A_TimeSincePriorHotkey < 750)
 	{
 		if (A_PriorHotKey = "<^<#F7") 		; Alpha
-			SendInput, {>^Delete}
+			SendInput, ^{Delete}
 		else if (A_PriorHotKey = "<^<#F6")  ; 2nd
 			SendInput, {NumpadIns}
 	}
@@ -126,7 +126,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 		else if (A_PriorHotKey = "<^<#F6")  ; 2nd
 			SendInput, +{Left}
 	}
-	else 								; no modifier
+	else 									; no modifier
 		SendInput, {Left}
 	Return
 <#<!<+Up::
@@ -138,7 +138,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 		else if (A_PriorHotKey = "<^<#F6")  ; 2nd
 			SendInput, +{Up}
 	}
-	else 								; no modifier
+	else 									; no modifier
 		SendInput, {Up}
 	Return
 <#<!<+Right::
@@ -150,7 +150,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 		else if (A_PriorHotKey = "<^<#F6")  ; 2nd
 			SendInput, +{Right}
 	}
-	else 								; no modifier
+	else 									; no modifier
 		SendInput, {Right}
 	Return
 
@@ -168,7 +168,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 		else if (A_PriorHotKey = "<^<#F6")  ; 2nd
 			SendInput, {Media_Play_Pause}
 	}
-	else 								; no modifier
+	else 									; no modifier
 		SetCapsLockState % !GetKeyState("CapsLock", "T") ; Toggles capslock
 	Return
 <^<#<!<+F5:: ; stat
@@ -178,9 +178,9 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 		if (A_PriorHotKey = "<^<#F7") 		; Alpha
 			SendInput, {Media_Next}
 		else if (A_PriorHotKey = "<^<#F6")  ; 2nd
-			SendInput, {Media_Prev}
+			SendInput, {{}{}}{Left}         ;Outputs {}
 	}
-	else 								; no modifier
+	else 									; no modifier
 		SendInput, {Tab}
 	Return
 <#<!<+Down::
@@ -192,7 +192,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 		else if (A_PriorHotKey = "<^<#F6")  ; 2nd
 			SendInput, +{Down}
 	}
-	else 								; no modifier
+	else 									; no modifier
 		SendInput, {Down}
 	Return
 	
@@ -217,7 +217,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 			SendInput, A
 		else if (A_PriorHotKey = "<^<#F6")  ; 2nd
 			SendInput, ^a
-		else							; no modifier
+		else								; no modifier
 			SendInput, a
 	}
 	Return
@@ -234,18 +234,18 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 			else 								; no modifier
 				SendInput, {AppsKey} ; open right click menu
 	}
-	else if (keyStatus = 1)					;[Alpha Input]
+	else if (keyStatus = 1)						;[Alpha Input]
 	{
 			if (A_PriorHotKey = "<^<#F7") 		; Alpha
 				SendInput, B
 			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
 				SendInput, ^b
-			else							; no modifier
+			else								; no modifier
 				SendInput, b
 	}
 	
 	Return
-<^<#<!<+F6::
+<^<#<!<+F6:: ;prgm
 	if (keyStatus = 0)							;[Numeric Input]
 	{
 		if ((A_PriorHotKey = "<^<#F7" or A_PriorHotKey = "<^<#F6") and A_TimeSincePriorHotkey < 750)
@@ -258,34 +258,119 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 			else 								; no modifier
 				SendInput, {>^>+Escape}
 	}
-	else if (keyStatus = 1)					;[Alpha Input]
+	else if (keyStatus = 1)						;[Alpha Input]
 	{
 			if (A_PriorHotKey = "<^<#F7") 		; Alpha
 				SendInput, C
 			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
 				SendInput, ^c
-			else							; no modifier
+			else								; no modifier
 				SendInput, c
 	}
 	
 	Return
-<^<#<+F2::
-
-	SendInput, {Help}
+<^<#<+F2:: ;vars
+	if (keyStatus != 2)						;[Numeric and Alpha Input]
+		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
+		{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, {Volume_Down}
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, {Volume_Up}
+		}										; no modifier
+		else
+			SendInput, >#{Tab}
+	
 	Return
-<^<#<+F9::
-	SendInput, {Backspace}
+<^<#<+F9:: ;clear
+	if (keyStatus != 2)			;[Numeric and Alpha Input]
+		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
+		{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, ^{Backspace}			
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+			{
+				SendInput, {Home}+{End}{Delete}
+				
+			}
+		}										; no modifier
+		else
+			SendInput, {Backspace}
+	
 	Return
 	
 ;x^-1 to ^
-<^<#F9::
-	Send, x{^}-1
+<^<#F9:: ;x^-1
+	if (keyStatus = 0)							;[Numeric Input]
+	{
+		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
+		{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, D
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, []{Left}
+		}										; no modifier
+		else
+			SendInput, x{^}-1
+	}
+	else if (keyStatus = 1)						;[Alpha Input]
+	{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, D
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, ^d
+			else								; no modifier
+				SendInput, d
+	}
+	
 	Return
-<^<#<!F9::
-	SendInput, sin(
+<^<#<!F9:: ;sin
+		if (keyStatus = 0)							;[Numeric Input]
+	{
+		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
+		{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, E
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, sin{^}-1(){Left}
+		}										; no modifier
+		else
+			SendInput, sin(){Left}
+	}
+	else if (keyStatus = 1)						;[Alpha Input]
+	{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, E
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, ^e
+			else								; no modifier
+				SendInput, e
+	}
+	
 	Return
-<^<#<!<+F7::
-	SendInput, cos(
+<^<#<!<+F7:: ;cos
+	if (keyStatus = 0)							;[Numeric Input]
+	{
+		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
+		{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, F
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, cos{^}-1(){Left}
+		}							; no modifier
+		else
+			SendInput, cos(){Left}
+	}
+	else if (keyStatus = 1)						;[Alpha Input]
+	{
+			if (A_PriorHotKey = "<^<#F7") 		; Alpha
+				SendInput, F
+			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
+				SendInput, ^f
+			else								; no modifier
+				SendInput, f
+	}
+	
 	Return
 <^<#<+F3::
 	SendInput, tan(
@@ -420,7 +505,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 				if (A_PriorHotKey = "<^<#F7") 		; Alpha
 					SendInput, Y
 				else if (A_PriorHotKey = "<^<#F6")  ; 2nd
-					SendInput, ^1
+					SendInput, ^y
 			}
 			else 								; no modifier
 				SendInput, {Numpad1}
