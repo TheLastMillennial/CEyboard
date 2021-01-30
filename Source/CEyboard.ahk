@@ -1014,7 +1014,7 @@ TrayTip, CEyboard, Press [alpha] then [mode] to swap modes. Numlock status: %Num
 	}
 	
 	Return
-Enter:: ;Enter
+NumpadEnter:: ;Enter
 	if (keyStatus = 0)							;[Numeric Input]
 	{
 		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
@@ -1025,16 +1025,16 @@ Enter:: ;Enter
 				SendInput, ^{Enter}
 		}										; no modifier
 		else
-			SendInput, {Enter}
+			SendInput, {NumpadEnter}
 	}
 	else if (keyStatus = 1)						;[Alpha Input]
 	{
 			if (A_PriorHotKey = "<^<#F7") 		; Alpha
 				SendInput, +{Enter}
 			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
-				SendInput, ^+z
+				SendInput ^+z
 			else								; no modifier
-				SendInput, {Enter}
+				SendInput, {NumpadEnter}
 	}
 	Return
 	
