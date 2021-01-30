@@ -9,8 +9,10 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ;keyStatus 0 is number input; keyStatus 1 is alpha input; keyStatus 2 is emulator input
 keyStatus := 0
+triggerSleep := false
+NumLState := GetKeyState("NumLock", "T")
 
-TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2, 32
+TrayTip, CEyboard, Press [alpha] then [mode] to swap modes. Numlock status: %NumLState%, 2, 32
 
 ;y= to graph. The 2nd and alpha add F6 to F15 capabilities
 <^<#F1:: ;y=
@@ -30,12 +32,12 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2, 32
 	if ((A_PriorHotKey = "<^<#F7" or A_PriorHotKey = "<^<#F6") and A_TimeSincePriorHotkey < 750)
 	{
 		if (A_PriorHotKey = "<^<#F7")		; Alpha
-			SendInput, {F13}
+			SendInput, {F12}
 		else if (A_PriorHotKey = "<^<#F6")  ; 2nd
-			SendInput, {F8}
+			SendInput, {F7}
 	}
 	else 									; no modifier
-		SendInput, {F3}
+		SendInput, {F2}
 	Return
 <^<#F3:: ;zoom
 	if (keyStatus != 2)
@@ -80,7 +82,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2, 32
 	SendInput, {>!} ;Sends right alt
 	Return
 <^<#<!F6:: 	;mode							;handles mode swapping
-	if ((A_PriorHotKey = "<^<#F7" or A_PriorHotKey = "<^<#F6") and A_TimeSincePriorHotkey < 750)
+	if ((A_PriorHotKey = "<^<#F7" or A_PriorHotKey = "<^<#F6" or A_PriorHotKey = "<^<#<!F5") and A_TimeSincePriorHotkey < 750)
 	{
 		if (A_PriorHotKey = "<^<#F7") 		; Alpha
 		{
@@ -88,23 +90,27 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2, 32
 			if(keyStatus = 3)
 				keyStatus:=0
 			if(keyStatus=0)
-				TrayTip, TI-84 Plus CE Hotkey, Mode 0: Numeric input (default), 2, 16, 32
+				TrayTip, CEyboard, Mode 0: Numeric input (default), 2, 16, 32
 			if(keyStatus=1)
-				TrayTip, TI-84 Plus CE Hotkey, Mode 1: Alpha input, 2, 16, 32
+				TrayTip, CEyboard, Mode 1: Alpha input, 2, 16, 32
 			if(keyStatus=2)
-				TrayTip, TI-84 Plus CE Hotkey, Mode 2: Emulator input, 2, 16, 32
+				TrayTip, CEyboard, Mode 2: Emulator input, 2, 16, 32
 		}
 		else if (A_PriorHotKey = "<^<#F6")   ; 2nd
 			SendInput, {Escape}
 		else if (A_PriorHotKey = "<^<#<!F5") ; On
-			SendInput, {Sleep}
+		{
+			if triggerSleep
+				SendInput, {Sleep}
+			triggerSleep := false
+		}
 	}
 	else 									; no modifier
 		if (keyStatus !=2)
 		{
 			SetNumLockState % !GetKeyState("NumLock", "T")
 			NumLState := GetKeyState("NumLock", "T")
-			TrayTip, TI-84 Plus CE Hotkey, NumLock set to %NumLState%, 1, 16, 32 ;delete this line if you don't want a notification whenever numlock changes
+			TrayTip, CEyboard, NumLock set to %NumLState%, 1, 16, 32 ;delete this line if you don't want a notification whenever numlock changes
 		}
 	Return
 	
@@ -236,7 +242,10 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2, 32
 					SendInput, ^b
 			}
 			else 								; no modifier
+			{
 				SendInput, {AppsKey} ; open right click menu
+				Sleep 50 ;A delay is necessary to prevent the menu from flickering
+			}
 	}
 	else if (keyStatus = 1)						;[Alpha Input]
 	{
@@ -260,7 +269,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2, 32
 					SendInput, ^c
 			}
 			else 								; no modifier
-				SendInput, {>^>+Escape}
+				SendInput, ^+{Escape}
 	}
 	else if (keyStatus = 1)						;[Alpha Input]
 	{
@@ -283,7 +292,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2, 32
 				SendInput, {Volume_Up}
 		}										; no modifier
 		else
-			SendInput, >#{Tab}
+			SendInput, #{Tab}
 	
 	Return
 <^<#<+F9:: ;clear
@@ -917,12 +926,16 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2, 32
 <^<#<!F5:: ;on
 	if (keyStatus != 2)							;[Numeric and AlphaInput]
 	{
+		triggerSleep := false
 		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
 		{
 			if (A_PriorHotKey = "<^<#F7") 		; Alpha
 				SendInput, {CtrlBreak}
 			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
-				TrayTip, TI-84 Plus CE Hotkey, Press [mode] to put computer to sleep. Wait 1 second to cancel., 2, 32
+			{
+				triggerSleep := true
+				TrayTip, CEyboard, Press [mode] to put computer to sleep. Wait 1 second to cancel., 2, 32
+			}
 		}										; no modifier
 		else
 			SendInput, {Pause}
@@ -1001,8 +1014,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2, 32
 	}
 	
 	Return
-;No need to edit Enter, it already works as the enter key
-Enter::
+Enter:: ;Enter
 	if (keyStatus = 0)							;[Numeric Input]
 	{
 		if ((A_PriorHotKey = "<^<#F7") or (A_PriorHotKey = "<^<#F6")) and (A_TimeSincePriorHotkey < 750)
