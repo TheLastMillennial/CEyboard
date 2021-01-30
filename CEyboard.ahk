@@ -10,7 +10,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ;keyStatus 0 is number input; keyStatus 1 is alpha input; keyStatus 2 is emulator input
 keyStatus := 0
 
-TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
+TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2, 32
 
 ;y= to graph. The 2nd and alpha add F6 to F15 capabilities
 <^<#F1:: ;y=
@@ -88,11 +88,11 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 			if(keyStatus = 3)
 				keyStatus:=0
 			if(keyStatus=0)
-				TrayTip, TI-84 Plus CE Hotkey, Mode 0: Numeric input (default), 2, 16
+				TrayTip, TI-84 Plus CE Hotkey, Mode 0: Numeric input (default), 2, 16, 32
 			if(keyStatus=1)
-				TrayTip, TI-84 Plus CE Hotkey, Mode 1: Alpha input, 2, 16
+				TrayTip, TI-84 Plus CE Hotkey, Mode 1: Alpha input, 2, 16, 32
 			if(keyStatus=2)
-				TrayTip, TI-84 Plus CE Hotkey, Mode 2: Emulator input, 2, 16
+				TrayTip, TI-84 Plus CE Hotkey, Mode 2: Emulator input, 2, 16, 32
 		}
 		else if (A_PriorHotKey = "<^<#F6")   ; 2nd
 			SendInput, {Escape}
@@ -104,7 +104,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 		{
 			SetNumLockState % !GetKeyState("NumLock", "T")
 			NumLState := GetKeyState("NumLock", "T")
-			TrayTip, TI-84 Plus CE Hotkey, NumLock set to %NumLState%, 1, 16 ;delete this line if you don't want a notification whenever numlock changes
+			TrayTip, TI-84 Plus CE Hotkey, NumLock set to %NumLState%, 1, 16, 32 ;delete this line if you don't want a notification whenever numlock changes
 		}
 	Return
 	
@@ -922,7 +922,7 @@ TrayTip, TI-84 Plus CE Hotkey, Press [alpha] then [mode] to swap modes, 2
 			if (A_PriorHotKey = "<^<#F7") 		; Alpha
 				SendInput, {CtrlBreak}
 			else if (A_PriorHotKey = "<^<#F6")  ; 2nd
-				TrayTip, TI-84 Plus CE Hotkey, Press [mode] to put computer to sleep. Wait 1 second to cancel., 2
+				TrayTip, TI-84 Plus CE Hotkey, Press [mode] to put computer to sleep. Wait 1 second to cancel., 2, 32
 		}										; no modifier
 		else
 			SendInput, {Pause}
