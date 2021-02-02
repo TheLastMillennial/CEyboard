@@ -10,34 +10,35 @@ It interprets the wierd keys the official TI-SmartPad app outputs and turns them
  - Mini-USB to USB type A cable.
 
 ## Required Software:
- - AutoHotKey (Only required if you're editing the source code)
-   - https://www.autohotkey.com/
  - SmartPad (Included, but if you lost the file you can find it from either link below) 
    - Texas Instruments: https://education.ti.com/en/software/details/en/B346FFA763C147F5BCE56880CECC28E6/smartpad-ce
    - TI-Planet: https://tiplanet.org/forum/archives_voir.php?id=1138279
  - TI-Connect CE
    - https://education.ti.com/en/products/computer-software/ti-connect-ce-sw
    
-## Release Installation:
+## Installation:
 1. Install TI-Connect CE.
 2. Connect your calculator to your computer.
 3. Send SmartPad to your calculator.
-4. Refer to instructions below for how to use CEyboard.
+4. Refer to 'Instructions' below for how to use CEyboard.
+5. Refer to 'Key Documentation' below to learn what each key does.
 
 ## Instructions:
-Whenever you want to use CEyboard:
+### How to start CEyboard:
 1. Run CEyboard.exe.
 2. Connect your calculator to your computer.
 3. Run the SmartPad app. (Found under the [apps] button)
 
-If you want to quit CEyboard:
+### How to quit CEyboard:
 1. Look on the taskbar for the CEyboard icon (a calculator with a red square on it), it's likely under the hidden icons tray.
 2. Right click the icon.
 3. Click 'Exit' to quit CEyboard entirely.
 
 To use the modifier keys, press the modifier key then press the key you want to modify within the 750ms window.
- - i.e. to display the imaginary i, press [2nd] then quickly press [.]
+ - i.e. to display the imaginary _i_, press [2nd] then quickly press [.]
+ 
 ### Modes:
+There are three modes (0 through 2). Press [alpha] then [mode] to swap modes. The first two modes prioritize a certain aspect of the keyboard: either Numerical Input or Alphabetic input. The last mode won't act like a normal keyboard since it is designed for TI-84 Plus CE emulators.
  - Mode 0: Numeric Input
    - This mode prioritiezes printing numbers. It replicates the buttons and menus printed on the TI-84 Plus CE as best as possible. 
    - i.e. Pressing [log] will output "log()". Pressing [2nd]>[log] will output "10^()". Pressing [alpha]>[log] will output "N".
@@ -48,15 +49,20 @@ To use the modifier keys, press the modifier key then press the key you want to 
    - Disables all hotkeys so it works normally in emulators such as TI-Smartview or CEmu.
 
 ## Troubleshooting:
-If you encounter an issue where Office opens when you press a key, you can apply a registry tweak using command prompt with admin privliges.
-REG ADD HKLM\Software\Classes\ms-officeapp\Shell\Open\Command /t REG_SZ /d rundll32
-I ran this myself and it has no negative effects. I found this tweak here: https://www.tenforums.com/microsoft-office-365/154729-disable-shift-ctrl-windows-alt-opening-login-office.html
+ - If you encounter an issue where Office opens when you press a key, you can apply a registry tweak using command prompt with admin privliges. 
 
-If you have any other problems, please create an issue on the Github page or on Cemetech!
+  > REG ADD HKLM\Software\Classes\ms-officeapp\Shell\Open\Command /t REG_SZ /d rundll32 
+
+  I ran this myself and it has no negative effects. I found this tweak on [tenforums](https://www.tenforums.com/microsoft-office-365/154729-disable-shift-ctrl-windows-alt-opening-login-office.html).
+ - If some keys aren't working properly, try turning on Numlock. You can do this by pressing [mode]. A notification will appear that says Numlock has been set to either 1 or 0.   
+   - 1 means Numlock is now on.
+   - 0 means Numlock is now off.
+
+ - If you have any other problems, please create an issue on the Github page or on Cemetech!
 https://www.cemetech.net/forum/viewtopic.php?t=17392
 
 ## Key Documentation
-Latest, detailed documentation: https://1drv.ms/x/s!Al_ZukYl7Xyyzmmzj-SOTPJi2rUu?e=5c0Xoo
+Latest, detailed documentation (Excel spreadsheet): https://1drv.ms/x/s!Al_ZukYl7Xyyzmmzj-SOTPJi2rUu?e=5c0Xoo
 
 If the above link is broken, here's a simplified table:
 |Mode 0: Numeric Input|No Modifier                       |2nd Modifier                                               |Alpha Modifier|Notes                                                         |Mode 1: Alpha Input|No Modifier    |2nd Modifier                                               |Alpha Modifier|Notes                               |
