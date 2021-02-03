@@ -979,7 +979,7 @@ TrayTip, CEyboard, Press [alpha] then [mode] to swap modes. Numlock status: %num
 		if alpha or second
 		{
 			if alpha 		; Alpha
-				SendInput, Θ
+				SendInput, θ
 			else if second  ; 2nd
 				SendInput, `%
 		}							; no modifier
