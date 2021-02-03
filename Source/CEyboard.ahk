@@ -195,8 +195,16 @@ TrayTip, CEyboard, Press [alpha] then [mode] to swap modes. Numlock status: %num
 	
 	if (second and keyStatus != 2)
 	{
-		keyStatus = 1 ;set key status to alpha input (A-Lock)
-		TrayTip, CEyboard, Mode 1: Alpha Input, 2, 16, 32
+		if keyStatus = 0 ;numeric input
+		{
+			keyStatus := 1 ;set key status to alpha input (A-Lock)
+			TrayTip, CEyboard, Mode 1: Alpha Input, 2, 16, 32
+		}
+		else if keyStatus = 1
+		{
+			keyStatus := 0 ;set keyStatus to numeric input
+			TrayTip, CEyboard, Mode 0: Numeric Input, 2, 16, 32
+		}
 	}
 
 			
