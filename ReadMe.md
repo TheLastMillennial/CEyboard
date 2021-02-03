@@ -2,7 +2,7 @@
 An AutoHotKey Script for SmartPad on the TI-84 Plus CE.
 By TheLastMillennial
 
-This project allows you to treat your TI-84 Plus CE like an external keyboard! 
+CEyboard allows you to treat your TI-84 Plus CE like an external keyboard! 
 It interprets the wierd keys the official TI-SmartPad app outputs and turns them into useful key presses.
 
 ## Required Hardware:
