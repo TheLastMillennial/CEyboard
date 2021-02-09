@@ -221,14 +221,14 @@ TrayTip, CEyboard, Press [alpha] then [mode] to swap modes. Numlock status: %num
 	second := false
 	}
 	else 									; no modifier
-		SetCapsLockState % !GetKeyState("CapsLock", "T") ; Toggles capslock
+		SendInput, x
 	Return
 <^<#<!<+F5:: ; stat
 	if (keyStatus != 2)
 	if alpha or second
 	{
 		if alpha 		; Alpha
-			SendInput, {Media_Next}
+			SetCapsLockState % !GetKeyState("CapsLock", "T") ; Toggles capslock
 		else if second  ; 2nd
 			SendInput, {{}{}}{Left}         ;Outputs {}
 	alpha := false
@@ -264,7 +264,7 @@ TrayTip, CEyboard, Press [alpha] then [mode] to swap modes. Numlock status: %num
 					SendInput, ^a
 			}
 			else 								; no modifier
-				SendInput, {Launch_App2} 		;Launches the calculator
+				SendInput, ^f 		            ;ctrl+f
 		
 	}
 	else if (keyStatus = 1)
