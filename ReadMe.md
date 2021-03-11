@@ -14,7 +14,7 @@ It interprets the wierd keys the official TI-SmartPad app outputs and turns them
    - Texas Instruments: https://education.ti.com/en/software/details/en/B346FFA763C147F5BCE56880CECC28E6/smartpad-ce
    - TI-Planet: https://tiplanet.org/forum/archives_voir.php?id=1138279
  - TI-Connect CE
-   - https://education.ti.com/en/products/computer-software/ti-connect-ce-sw
+   - Texas Instruments: https://education.ti.com/en/products/computer-software/ti-connect-ce-sw
    
 ## Installation:
 1. Install TI-Connect CE.
@@ -64,7 +64,8 @@ The first two modes prioritize a certain aspect of the keyboard: Numerical Input
  - If you do not recieve any notifications from CEyboard, check in Settings that notifications are enabled for CEyboard. Do this even if you're sure you didn't turn them off.
 
  - If you have any other problems, please create an issue on the Github page or on Cemetech!
-https://www.cemetech.net/forum/viewtopic.php?t=17392
+   - Cemetech: https://www.cemetech.net/forum/viewtopic.php?t=17392
+   - Github: https://github.com/TheLastMillennial/CEyboard
 
 ## Key Documentation
 Latest, detailed documentation (Excel spreadsheet): https://1drv.ms/x/s!Al_ZukYl7Xyyzmmzj-SOTPJi2rUu?e=5c0Xoo
