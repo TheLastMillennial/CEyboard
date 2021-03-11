@@ -1,6 +1,6 @@
 ﻿#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 ; #Warn  ; Enable warnings to assist with detecting common errors.
-SendInput,Mode Input  ; Recommended for new scripts due to its superior speed and reliability.
+;SendInput,Mode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ;Keybindings by TheLastMillennial
@@ -16,7 +16,7 @@ numLState := GetKeyState("NumLock", "T")
 triggerSleep := false
 
 
-TrayTip, CEyboard, Press [alpha] then [mode] to swap modes. Numlock status: %numLState%, 2, 32
+TrayTip, CEyboard, Press [alpha] then [mode] to swap modes. Numlock status: %numLState%, 2
 
 ;y= to graph. The 2nd and alpha add F6 to F15 capabilities
 <^<#F1:: ;y=
@@ -104,11 +104,11 @@ TrayTip, CEyboard, Press [alpha] then [mode] to swap modes. Numlock status: %num
 			if(keyStatus = 3)
 				keyStatus:=0
 			if(keyStatus=0)
-				TrayTip, CEyboard, Mode 0: Numeric input (default), 2, 16, 32
+				TrayTip, CEyboard, Mode 0: Numeric input (default), 2, 16
 			if(keyStatus=1)
-				TrayTip, CEyboard, Mode 1: Alpha input, 2, 16, 32
+				TrayTip, CEyboard, Mode 1: Alpha input, 2, 16
 			if(keyStatus=2)
-				TrayTip, CEyboard, Mode 2: Emulator input, 2, 16, 32
+				TrayTip, CEyboard, Mode 2: Emulator input, 2, 16
 		}
 		else if second   ; 2nd
 			SendInput, {Escape}
@@ -126,7 +126,7 @@ TrayTip, CEyboard, Press [alpha] then [mode] to swap modes. Numlock status: %num
 		{
 			SetNumLockState % !GetKeyState("NumLock", "T")
 			numLState := GetKeyState("NumLock", "T")
-			TrayTip, CEyboard, NumLock set to %numLState%, 1, 16, 32 ;delete this line if you don't want a notification whenever numlock changes
+			TrayTip, CEyboard, NumLock set to %numLState%, 1, 16 ;delete this line if you don't want a notification whenever numlock changes
 		}
 	Return
 	
@@ -198,12 +198,12 @@ TrayTip, CEyboard, Press [alpha] then [mode] to swap modes. Numlock status: %num
 		if keyStatus = 0 ;numeric input
 		{
 			keyStatus := 1 ;set key status to alpha input (A-Lock)
-			TrayTip, CEyboard, Mode 1: Alpha Input, 2, 16, 32
+			TrayTip, CEyboard, Mode 1: Alpha Input, 2, 16
 		}
 		else if keyStatus = 1
 		{
 			keyStatus := 0 ;set keyStatus to numeric input
-			TrayTip, CEyboard, Mode 0: Numeric Input, 2, 16, 32
+			TrayTip, CEyboard, Mode 0: Numeric Input, 2, 16
 		}
 	}
 
@@ -1038,7 +1038,7 @@ TrayTip, CEyboard, Press [alpha] then [mode] to swap modes. Numlock status: %num
 			else if second  ; 2nd
 			{
 				triggerSleep := true
-				TrayTip, CEyboard, Press [mode] to put computer to sleep. Wait 1 second to cancel., 2, 32
+				TrayTip, CEyboard, Press [mode] to put computer to sleep. Wait 1 second to cancel., 2
 			}
 			
 	alpha := false

@@ -61,6 +61,8 @@ The first two modes prioritize a certain aspect of the keyboard: Numerical Input
    - 1 means Numlock is now on.
    - 0 means Numlock is now off.
 
+ - If you do not recieve any notifications from CEyboard, check in Settings that notifications are enabled for CEyboard. Do this even if you're sure you didn't turn them off.
+
  - If you have any other problems, please create an issue on the Github page or on Cemetech!
 https://www.cemetech.net/forum/viewtopic.php?t=17392
 
