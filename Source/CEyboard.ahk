@@ -380,7 +380,7 @@ TrayTip, CEyboard, Press [alpha] then [mode] to swap modes. Numlock status: %num
 				SendInput, []{Left}
 		}										; no modifier
 		else
-			SendInput, x{^}-1
+			SendInput, {^}-1
 	}
 	else if (keyStatus = 1)						;[Alpha Input]
 	{
@@ -512,7 +512,7 @@ TrayTip, CEyboard, Press [alpha] then [mode] to swap modes. Numlock status: %num
 				SendInput, √(){Left}
 		}										; no modifier
 		else
-			Send, x{^}2
+			Send, {^}2
 	}
 	else if (keyStatus = 1)						;[Alpha Input]
 	{
