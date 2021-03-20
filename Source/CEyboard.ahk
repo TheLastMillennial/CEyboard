@@ -193,7 +193,7 @@ TrayTip, CEyboard, Press [alpha] then [mode] to swap modes. Numlock status: %num
 <^<#F7:: ;alpha
 	alpha := !alpha ;alpha key was pressed, toggle it
 	
-	if (second and keyStatus != 2)
+	if (second and keyStatus != 2) ;if 2nd was pressed, toggle "alpha lock".
 	{
 		if keyStatus = 0 ;numeric input
 		{
@@ -205,9 +205,11 @@ TrayTip, CEyboard, Press [alpha] then [mode] to swap modes. Numlock status: %num
 			keyStatus := 0 ;set keyStatus to numeric input
 			TrayTip, CEyboard, Mode 0: Numeric Input, 2, 16
 		}
+		alpha := false ; disables last alpha press to avoid confusion after switching modes
+		second := false ; disables last 2nd to avoid undesired operation after switching modes
 	}
 
-			
+		
 	Return
 <^<#<!F7:: ;XT0n
 	if (keyStatus != 2)
