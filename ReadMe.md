@@ -6,13 +6,15 @@ CEyboard allows you to treat your TI-84 Plus CE like an external keyboard!
 It interprets the wierd keys the official TI-SmartPad app outputs and turns them into useful key presses.
 
 ## Required Hardware:
- - TI-84 Plus CE or TI-83 Premium CE. (Note, some keys are not designed for the TI-83 Premium CE)
+ - TI-84 Plus CE or TI-83 Premium CE. 
+   - _Note: some keys are not designed for the TI-83 Premium CE_
  - Mini-USB to USB type A cable.
 
 ## Required Software:
- - SmartPad (Included, but if you lost the file you can find it from either link below) 
+ - SmartPad _Note: SmartPad is included in the release._ 
    - Texas Instruments: https://education.ti.com/en/software/details/en/B346FFA763C147F5BCE56880CECC28E6/smartpad-ce
    - TI-Planet: https://tiplanet.org/forum/archives_voir.php?id=1138279
+     - _Note: Use this link if the previous link does not work._
  - TI-Connect CE
    - Texas Instruments: https://education.ti.com/en/products/computer-software/ti-connect-ce-sw
    
@@ -25,18 +27,15 @@ It interprets the wierd keys the official TI-SmartPad app outputs and turns them
 
 ## Instructions:
 ### How to start CEyboard:
-1. Run CEyboard.exe.
+1. Run CEyboard.exe. A notification will appear verifying that CEyboard is running.
 2. Connect your calculator to your computer.
 3. Run the SmartPad app. (Found under the [apps] button)
 
 ### How to quit CEyboard:
-1. Look on the taskbar for the CEyboard icon (a calculator with a red square on it), it's likely under the hidden icons tray.
+1. Look on the taskbar for the CEyboard icon (a calculator with a red square on it). It's likely under the hidden icons tray.
 2. Right click the icon.
 3. Click 'Exit' to quit CEyboard entirely.
 
-To use the modifier keys, press the modifier key then press the key you want to modify.
- - i.e. to display the imaginary _i_, press [2nd] then press [.]
- 
 ### Modes:
 There are three modes (0, 1, and 2). 
  - Press [alpha]>[mode] to step through each mode. 
@@ -52,20 +51,26 @@ The first two modes prioritize a certain aspect of the keyboard: Numerical Input
    - Disables all hotkeys so it works normally in emulators such as TI-Smartview or CEmu.
 
 ## Troubleshooting:
+### Office keeps randomly opening!
  - If you encounter an issue where Office opens when you press a key, you can apply a registry tweak using command prompt with admin privliges. 
 
   > REG ADD HKLM\Software\Classes\ms-officeapp\Shell\Open\Command /t REG_SZ /d rundll32 
 
   I ran this myself and experienced no negative effects. I pulled this tweak from [tenforums](https://www.tenforums.com/microsoft-office-365/154729-disable-shift-ctrl-windows-alt-opening-login-office.html).
+  
+### Some keys aren't working!
  - If some keys aren't working properly, try turning on Numlock. You can do this by pressing [mode]. A notification will appear that says Numlock has been set to either 1 or 0.   
    - 1 means Numlock is now on.
    - 0 means Numlock is now off.
 
+### I'm not getting notifications from CEyboard!
  - If you do not recieve any notifications from CEyboard, check in Settings that notifications are enabled for CEyboard. Do this even if you're sure you didn't turn them off.
 
+### I don't see my issue listed!
  - If you have any other problems, please create an issue on the Github page or on Cemetech!
+   - Github: https://github.com/TheLastMillennial/CEyboard/issues
    - Cemetech: https://www.cemetech.net/forum/viewtopic.php?t=17392
-   - Github: https://github.com/TheLastMillennial/CEyboard
+
 
 ## Key Documentation
 Latest, detailed documentation (Excel spreadsheet): https://1drv.ms/x/s!Al_ZukYl7Xyyzmmzj-SOTPJi2rUu?e=5c0Xoo
