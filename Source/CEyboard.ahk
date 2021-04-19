@@ -290,7 +290,7 @@ TrayTip, CEyboard, Press [alpha] then [mode] to swap modes. Numlock status: %num
 				if alpha 		; Alpha
 					SendInput, B
 				else if second  ; 2nd
-					SendInput, ^b
+					SendInput, °
 			}
 			else 								; no modifier
 			{
@@ -1010,7 +1010,7 @@ TrayTip, CEyboard, Press [alpha] then [mode] to swap modes. Numlock status: %num
 			if alpha 		; Alpha
 				SendInput, {"}
 			else if second  ; 2nd
-				SendInput, ^{Tab}
+				SendInput, =
 		}										; no modifier
 		else
 			SendInput, {NumpadAdd}
